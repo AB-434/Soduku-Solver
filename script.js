@@ -37,25 +37,33 @@ function solveSudoku() {
     /**
      * Validate the grid
      */
-    if(!isGridValid(board)){
-        alert("NO SOLUTION EXISTS FOR THE ABOVE INPUT");
+    if (!isGridValid(board)) {
+        Swal.fire({
+            icon: 'error',
+            title: 'Invalid Input',
+            text: 'NO SOLUTION EXISTS FOR THE ABOVE INPUT!',
+            confirmButtonColor: '#d33',
+        });
         return;
     }
-
 
     const solvedBoard = solveSudokuHelper(board);
     /**
      * Update the board
      */
-    if(solvedBoard){
+    if (solvedBoard) {
         grid.forEach((input, index) => {
             const row = Math.floor(index / 9);
             const col = index % 9;
             input.value = solvedBoard[row][col];
         });
-    } 
-    else{
-        alert('No solution exists!');
+    } else {
+        Swal.fire({
+            icon: 'warning',
+            title: 'No Solution',
+            text: 'No solution exists for the given Sudoku puzzle!',
+            confirmButtonColor: '#3085d6',
+        });
     }
 }
 
